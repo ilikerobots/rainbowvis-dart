@@ -1,6 +1,6 @@
 name: rainbow_vis
 version: 0.0.1
-description: Color data visualization; Easily map numbers to a smooth-transitioning color legend.
+description: Color data visualization; easily map numbers to a smooth-transitioning color legend.
 author: Mike Hoolehan <mike@hoolehan.com>
 homepage: https://github.com/ilikerobots/rainbowvis-dart
 
