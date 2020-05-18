@@ -70,6 +70,13 @@ main() {
       expect(rb[1], '1100ff00');
       expect(rb[2], '1100ff00');
     });
+
+    test('With opacity and hash symbol', () {
+      var spec = ['#33FFFFFF', '#FF000000'];
+      var rb = Rainbow(spectrum: spec, rangeStart: 0.0, rangeEnd: 1.0);
+      expect(rb[0], '33ffffff');
+      expect(rb[1], 'ff000000');
+    });
   });
 
   group('Getters', () {

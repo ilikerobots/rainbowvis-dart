@@ -82,8 +82,9 @@ class ColourGradient {
   static String _getHexColour(string) {
     if (_isHexColour(string)) {
       var colorPart = string.substring(string.length - 6, string.length);
-      var opacityPart =
-          string.length >= 8 ? string.substring(string.length - 8, 2) : 'FF';
+      var opacityPart = string.length >= 8
+          ? string.substring(string.length - 8, string.length - 6)
+          : 'FF';
       return "$opacityPart$colorPart";
     } else {
       var name = string.toLowerCase();
