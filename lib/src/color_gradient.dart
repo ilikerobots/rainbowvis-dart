@@ -34,7 +34,8 @@ class ColourGradient {
     final endHex = _getHexColour(endColour);
     return _calcHex(number, startHex.substring(0, 2), endHex.substring(0, 2)) +
         _calcHex(number, startHex.substring(2, 4), endHex.substring(2, 4)) +
-        _calcHex(number, startHex.substring(4, 6), endHex.substring(4, 6));
+        _calcHex(number, startHex.substring(4, 6), endHex.substring(4, 6)) +
+        _calcHex(number, startHex.substring(6, 8), endHex.substring(6, 8));
   }
 
   _calcHex(num number, String channelStartBase16, String channelEndBase16) {
@@ -72,7 +73,7 @@ class ColourGradient {
   }
 
   static bool _isHexColour(string) =>
-      RegExp(r"^#?[0-9a-fA-F]{6}$").hasMatch(string);
+      RegExp(r"^#?[0-9a-fA-F]{6,8}$").hasMatch(string);
 
   static bool _isValidColor(string) {
     return _getHexColour(string) != null;
@@ -80,11 +81,14 @@ class ColourGradient {
 
   static String _getHexColour(string) {
     if (_isHexColour(string)) {
-      return string.substring(string.length - 6, string.length);
+      var colorPart = string.substring(string.length - 6, string.length);
+      var opacityPart =
+          string.length >= 8 ? string.substring(string.length - 8, 2) : 'FF';
+      return "$opacityPart$colorPart";
     } else {
       var name = string.toLowerCase();
       if (_colourNames.containsKey(name)) {
-        return _colourNames[name];
+        return "FF${_colourNames[name]}";
       }
       return null;
     }

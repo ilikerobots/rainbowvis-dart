@@ -12,6 +12,8 @@ class Rainbow {
 
   final num _rangeEnd;
 
+  final bool _includeOpacity;
+
   final List<ColourGradient> _gradients;
 
   /// Construct a new Rainbow
@@ -25,7 +27,8 @@ class Rainbow {
       rangeEnd = 1.0})
       : _gradients = _spectrumToGradients(spectrum, rangeStart, rangeEnd),
         _rangeStart = rangeStart,
-        _rangeEnd = rangeEnd {
+        _rangeEnd = rangeEnd,
+        _includeOpacity = _spectrumContainsOpacity(spectrum) {
     assert(spectrum.length >= 2);
     assert(rangeStart != rangeEnd);
     assert(rangeStart != null && rangeEnd != null);
@@ -66,7 +69,8 @@ class Rainbow {
   /// Return the interpolated color along the spectrum for domain item.
   /// If the number is outside the bounds of the domain, then the nearest
   /// edge color is returned.
-  String operator [](num number) => _colourAt(number);
+  String operator [](num number) =>
+      _includeOpacity ? _colourAt(number) : _stripOpacity(_colourAt(number));
 
   String _colourAt(num number) {
     if (_gradients.length == 1) {
@@ -86,7 +90,19 @@ class Rainbow {
     }
   }
 
-//  bool get _isAscending => rangeStart < rangeEnd;
+  static bool _spectrumContainsOpacity(List<String> spectrum) {
+    var alphaHexRe = RegExp(r"^#?[0-9a-fA-F]{8}$");
+    var hasOpacity = false;
+    for (var col in spectrum) {
+      if (alphaHexRe.hasMatch(col)) {
+        hasOpacity = true;
+        break;
+      }
+    }
+    return hasOpacity;
+  }
+
+  _stripOpacity(String c) => c.length == 8 ? c.substring(2) : c;
 
   @override
   bool operator ==(Object other) =>

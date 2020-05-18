@@ -1,5 +1,5 @@
 name: rainbow_vis
-version: 1.0.0
+version: 1.0.1
 description: Color data visualization; easily map numerical domain to a smooth-transitioning color range.
 homepage: https://github.com/ilikerobots/rainbowvis-dart
 

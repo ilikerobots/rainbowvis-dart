@@ -7,8 +7,6 @@ written by [anomal](https://github.com/anomal).
 
 ## Usage
 
-Instantiate a Rainbow, e.g.
-
 To interpolate a color among the spectrum, use the list access operator, e.g.
 ```dart
 var rb = Rainbow(spectrum: ["#ff0000", 'white', '00FF00'],

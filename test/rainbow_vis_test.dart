@@ -56,6 +56,20 @@ main() {
         expect(rbu[u], rbd[d]);
       }
     });
+
+    test('With opacity', () {
+      var spec = ['red', 'ff00FF00', '#FF0000', 'AA113311', '1100ff00'];
+      var rb = Rainbow(spectrum: spec, rangeStart: 0.0, rangeEnd: 1.0);
+      expect(rb[-1], 'ffff0000');
+      expect(rb[0], 'ffff0000');
+      expect(rb[.1], 'ff996600');
+      expect(rb[.25], 'ff00ff00');
+      expect(rb[.50], 'ffff0000');
+      expect(rb[.66667], 'c660220b');
+      expect(rb[.75], 'aa113311');
+      expect(rb[1], '1100ff00');
+      expect(rb[2], '1100ff00');
+    });
   });
 
   group('Getters', () {
@@ -127,7 +141,7 @@ main() {
     test('Invalid colors', () {
       expect(() => Rainbow(spectrum: ['nosuchcolor', 'FFFFFF', '#00ff00']),
           throwsA(isA<AssertionError>()));
-      expect(() => Rainbow(spectrum: ['FF0000', 'FFFFFF00', '#00ff00']),
+      expect(() => Rainbow(spectrum: ['FF0000', 'FFFFFFF00', '#00ff00']),
           throwsA(isA<AssertionError>()));
     });
   });
