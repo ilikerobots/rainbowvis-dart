@@ -23,3 +23,7 @@ To run on vm (default): ```pub run test```  As usual, tests can be run on other 
 
 
 
+## See Also
+
+For a Flutter-specific version of this package, see [rainbow_color](https://pub.dev/packages/rainbow_color) which interfaces with `Color` objects and provides additional tween support.
+                                                    
