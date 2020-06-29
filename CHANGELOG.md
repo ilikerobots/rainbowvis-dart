@@ -9,3 +9,6 @@
 
 ## 1.0.2
 - Fix bug when alpha provided with leading hash symbol
+
+## 1.0.3
+- readme
