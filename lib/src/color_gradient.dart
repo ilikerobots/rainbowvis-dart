@@ -23,15 +23,14 @@ class ColourGradient {
       this.endNum = 1.0})
       : super() {
     assert(startNum != endNum);
-    assert(startNum != null && endNum != null);
     assert(_isValidColor(startColour));
     assert(_isValidColor(endColour));
   }
 
   ///The interpolated color
   String colourAt(num number) {
-    final startHex = _getHexColour(startColour);
-    final endHex = _getHexColour(endColour);
+    final startHex = _getHexColour(startColour) ?? 'FF000000';
+    final endHex = _getHexColour(endColour) ?? 'FFffffff';
     return _calcHex(number, startHex.substring(0, 2), endHex.substring(0, 2)) +
         _calcHex(number, startHex.substring(2, 4), endHex.substring(2, 4)) +
         _calcHex(number, startHex.substring(4, 6), endHex.substring(4, 6)) +
@@ -79,7 +78,7 @@ class ColourGradient {
     return _getHexColour(string) != null;
   }
 
-  static String _getHexColour(string) {
+  static String? _getHexColour(string) {
     if (_isHexColour(string)) {
       var colorPart = string.substring(string.length - 6, string.length);
       var opacityPart = string.length >= 8
